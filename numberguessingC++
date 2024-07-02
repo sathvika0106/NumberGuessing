@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+int main() {
+    int guessedNumber, randomNumber;
+    int correctGuesses = 0, wrongGuesses = 0, totalGuesses = 0;
+    char playAgain;
+
+    // Seed the random number generator
+    srand(time(0));
+
+    cout << "********************* Welcome to the Guess Number Game *********************\n";
+    cout << "Rules:\n";
+    cout << "1. Enter 'y' to play or 'n' to exit the game.\n";
+    cout << "2. You have to enter a number between 1 and 10.\n\n";
+
+    do {
+        cout << "Enter the number you guess (1-10): ";
+        cin >> guessedNumber;
+
+        if (guessedNumber < 1 || guessedNumber > 10) {
+            cout << "Invalid input. Please enter a number between 1 and 10.\n";
+            continue;
+        }
+
+        randomNumber = rand() % 10 + 1;
+
+        if (randomNumber == guessedNumber) {
+            cout << "Congratulations! You guessed the correct number.\n";
+            correctGuesses++;
+        } else {
+            cout << "Sorry, wrong guess. The correct number was " << randomNumber << ". Try again.\n";
+            wrongGuesses++;
+        }
+
+        totalGuesses++;
+
+        cout << "Do you want to try again? (y/n): ";
+        cin >> playAgain;
+        while (playAgain != 'y' && playAgain != 'n') {
+            cout << "Invalid input. Please enter 'y' to play again or 'n' to exit: ";
+            cin >> playAgain;
+        }
+
+    } while (playAgain != 'n');
+
+    cout << "\nYou tried " << totalGuesses << " times.\n";
+    cout << "You guessed the correct number " << correctGuesses << " times.\n";
+    cout << "You guessed the wrong number " << wrongGuesses << " times.\n";
+
+    return 0;
+}
